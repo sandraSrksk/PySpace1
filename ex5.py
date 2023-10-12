@@ -6,30 +6,22 @@ def sort_file(*args, insep=',', inend='\n', outsep=None, outend=None):
     csv_string = args[0]  # Get the CSV string from args
 
     # Set default values for outsep and outend
-    # if outsep is None:
-    #     outsep = insep
-    # if outend is None:
-    #     outend = inend
+    if outsep is None:
+        outsep = insep
+    if outend is None:
+        outend = inend
 
     # Split the CSV string into lines
     lines = csv_string.split(inend)
 
     # Remove blank lines and lines with '#' character
-    #lines = [line for line in lines if line.strip() and not line.strip().startswith('#')]
+    lines = [line for line in lines if line.strip() and not line.strip().startswith('#')]
 
     # Sort the lines
     lines.sort()
-    newlines = []
-    for x in lines:
-        if outsep is not None:
-            x = x.replace(",",outsep )
-        if outend is not None:
-            x = x + outend
-        newlines.push(x)
-    # Join the sorted lines using outsep and outend
-    sorted_csv = outend.join(newlines)
+    sorted_csv = outend.join(lines)
 
-    return sorted_csv
+    return sorted_csv.replace(insep,outsep)
 
 csv_data = "John,Doe\nJane,Smith\n# Comment line\nAlice,Johnson\n"
 csv2 = "2,3,d\n1,4,d\n8,2,z\n2,4,x\n2,4,a"
